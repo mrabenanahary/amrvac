@@ -14,7 +14,7 @@ module mod_usr
 contains
 
   subroutine usr_init()
-    use mod_variables
+   use mod_variables
 
    !> to read and write user-defined parameters
    usr_set_parameters  => set_parameters
@@ -36,8 +36,8 @@ contains
   !> default user-defined parameters from files
   subroutine usr_set_default_parameters
     !-------------------------------------
-    usr_config%parcel_method                   = 'fixed_numbers'
-    usr_config%number_of_subregions            = 2 !< jet inlet + ambient medium
+    parcel_method                   = 'fixed_numbers'
+    number_of_subregions            = 2 !< jet inlet + ambient medium
     
   end subroutine usr_set_default_parameters
 

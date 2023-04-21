@@ -2,6 +2,7 @@ module mod_obj_input_output
   use mod_global_parameters
   use mod_obj_global_parameters
   use mod_obj_types  
+  use mod_obj_read_parameters
 
   implicit none
 
@@ -76,16 +77,16 @@ contains
    write(unit_config,*)'*************************************************'
    write(unit_config,*)''
      
-   call write_var_string(unit_config,usr_config_var%parcel_method,&
-      'Parcelling method name')
+   call write_var_string(unit_config,parcel_method,&
+      'Parcelling method name parcel_method ')
 
-   call check_avail_strings(usr_config_var%parcel_method,&
-      'usr_config%parcel_method',parcel_method_list,avail_prcl_mthd_nb)
+   call check_avail_strings(parcel_method,'parcel_method',parcel_method_list,&
+      avail_prcl_mthd_nb)
    
-   select case(trim(trim(usr_config_var%parcel_method)))
+   select case(trim(trim(parcel_method)))
     case(trim(parcel_method_list(1))) !< 'fixed_numbers'
-      call write_var_integer(unit_config,usr_config_var%number_of_subregions,&
-         'number of sub-regions')
+      call write_var_integer(unit_config,number_of_subregions,&
+         'number of sub-regions number_of_subregions ')
    end select
 
    
