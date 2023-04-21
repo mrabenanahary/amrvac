@@ -584,6 +584,8 @@ contains
     end if
     if(unit_velocity/=1.d0) then
       unit_pressure=unit_density*unit_velocity**2
+      !> Here, MPI-AMRVAC 3.0 assumes (particular) single-ionised hydrogen gas 
+      !> (see Rabenanahary et al. 2022)
       unit_temperature=unit_pressure/((2.d0+3.d0*He_abundance)*unit_numberdensity*kB)
     else if(unit_pressure/=1.d0) then
       unit_temperature=unit_pressure/((2.d0+3.d0*He_abundance)*unit_numberdensity*kB)

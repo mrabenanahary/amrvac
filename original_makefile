@@ -2,7 +2,7 @@ ifndef AMRVAC_DIR
 $(error AMRVAC_DIR is not set)
 endif
 
-ARCH = openmpi_run
+ARCH = openmpi_run-phys=hd
 NDIM := 2
 
 # By exporting these can be used when building libamrvac

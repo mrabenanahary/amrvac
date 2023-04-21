@@ -37,7 +37,7 @@ $(LIB_AMRVAC): $(OBJECTS)
 	$(AR) rcs $@ $^
 
 clean:
-	$(RM) *.o *.mod *.f $(LIB_AMRVAC)
+	$(RM) *.o *.mod *.f *.h $(LIB_AMRVAC)
 
 # INCLUDES are always compiled before FOBJECTS
 $(FOBJECTS:.t=.o): $(INCLUDES:.t=.mod)
