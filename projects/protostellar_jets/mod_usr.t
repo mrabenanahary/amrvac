@@ -4,6 +4,7 @@ module mod_usr
   use mod_obj_global_parameters
   use mod_obj_types
   
+  !test
 
   implicit none
 
