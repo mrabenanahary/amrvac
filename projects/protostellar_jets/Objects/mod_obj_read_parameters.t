@@ -13,7 +13,7 @@ contains
     implicit none
     class(usr_params) :: self
     !----------------------------------
-    self%is_it_null = 'no'
+    self%is_it_null = 'nonono'
   end subroutine new_procedure
 
   subroutine change_procedure(usr_config_var)

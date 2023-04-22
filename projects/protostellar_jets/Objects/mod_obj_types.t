@@ -8,12 +8,13 @@ module mod_obj_types
    type usr_params
 
     character(len=name_len) :: is_it_null
-    procedure(n_arg), pointer :: set_value => null()
+    procedure(n_arg), pass(self), pointer :: set_value => null()
     
 
     contains
 
     procedure, pass(self) :: set_default_proc => set_default_procdr
+
 
    end type usr_params
 
