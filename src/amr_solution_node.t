@@ -80,7 +80,8 @@ subroutine alloc_node(igrid)
       call mpistop("no such case")
   end select
 
-  ! set level information
+  !> set level information of igrid node
+  !> see forest:refine_tree_leaf for details
   level=igrid_to_node(igrid,mype)%node%level
 
   if(.not. allocated(ps(igrid)%w)) then
@@ -135,9 +136,9 @@ subroutine alloc_node(igrid)
   end if
 
   ! block pointer to current block
-  block=>ps(igrid)
+  block=>ps(igrid) !< block used in mod_usr and its children modules
 
-  ig^D=igrid_to_node(igrid,mype)%node%ig^D;
+  ig^D=igrid_to_node(igrid,mype)%node%ig^D; !< Spatial indices of the grid block
 
   node(plevel_,igrid)=level
   ^D&node(pig^D_,igrid)=ig^D\
@@ -153,6 +154,9 @@ subroutine alloc_node(igrid)
 !  ^D&rnode(rpxmax^D_,igrid)=xprobmax^D-dble(ng^D(level)-ig^D)*dg^D(level)\
 
   ^D&dx^D=rnode(rpdx^D_,igrid)\
+
+  !> Here is where the coordinates of the centers of each cells
+  !> in the current block are computed :
  {do ix=ixGlo^D,ixMhi^D-nghostcells
     ps(igrid)%x(ix^D%ixG^T,^D)=rnode(rpxmin^D_,igrid)+(dble(ix-nghostcells)-half)*dx^D
   end do\}

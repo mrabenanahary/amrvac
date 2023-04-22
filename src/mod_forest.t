@@ -9,20 +9,30 @@ module mod_forest
 
    !> The data structure that contains information about a tree node/grid block
    type tree_node
-      integer :: ig^D !< Spatial indices of the grid block
-      integer :: level !< Refinement level
-      integer :: igrid !< Index of grid on processor's grid-array
-      integer :: ipe   !< On which processor the grid is stored
+      !> Spatial indices of the grid block
+      integer :: ig^D 
+      !> Refinement level
+      integer :: level 
+      !> Index of grid on processor s grid-array
+      integer :: igrid 
+      !> On which processor the grid is stored
+      integer :: ipe   
       !> Extra integer, not set by default. Is used to go from pointer to array
       !> for coupling with a multigrid solver.
       integer :: id
-      logical :: leaf !< Is the grid a leaf (no further refinement)
+      !> Is the grid a leaf (no further refinement)
+      logical :: leaf 
       logical :: active
-      type(tree_node_ptr) :: parent !< Pointer to parent grid
-      type(tree_node_ptr) :: child(2^D&) !< Pointer to children
-      type(tree_node_ptr) :: neighbor(2,^ND) !< Pointer to neighbors
-      type(tree_node_ptr) :: next !< Next node at refinement level (linked list)
-      type(tree_node_ptr) :: prev !< Previous node at refinement level (linked list)
+      !> Pointer to parent grid
+      type(tree_node_ptr) :: parent 
+      !> Pointer to children
+      type(tree_node_ptr) :: child(2^D&) 
+      !> Pointer to neighbors
+      type(tree_node_ptr) :: neighbor(2,^ND) 
+      !> Next node at refinement level (linked list)
+      type(tree_node_ptr) :: next 
+      !> Previous node at refinement level (linked list)
+      type(tree_node_ptr) :: prev 
    end type tree_node
 
    !> Pointers to the coarse grid

@@ -172,6 +172,7 @@ subroutine refine_tree_leaf(child_igrid,child_ipe,igrid,ipe,active)
 
   call delete_from_linked_list(level,tree)
 
+  !> Here is where level->level+1 is incremented for each child node
   child_level=level+1
 
   {do ic^DB=1,2\}

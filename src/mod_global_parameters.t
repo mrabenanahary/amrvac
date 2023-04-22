@@ -129,15 +129,30 @@ module mod_global_parameters
   integer, allocatable :: node_sub(:,:)
 
   !> grid location info (corner coordinates and grid spacing)
-  integer, parameter :: rnodehi=3*^ND
+  integer, parameter :: rnodehi=3*^ND !< size of the array to stock the values indexed by the following variables
   integer, parameter :: rpxmin0_=0
-  integer, parameter :: rpxmin^D_=rpxmin0_+^D
+  !> index of the ^ND ^Dth-coordinates of the cell corners at the minimum value along ^D-axis
+  !> = index of ^Dth-coordinates of the points (1D), sides (2D), faces (3D) at the minimum value along ^D-axis
+  integer, parameter :: rpxmin^D_=rpxmin0_+^D 
   integer, parameter :: rpxmax0_=^ND
+  !> index of the ^ND ^Dth-coordinates of the cell corners at the maximal value along ^D-axis
+  !> = index of ^Dth-coordinates of the points (1D), sides (2D), faces (3D) at the maximal value along ^D-axis
   integer, parameter :: rpxmax^D_=rpxmax0_+^D
+
+  !> size({rpxmin^D,rpmax^D})=# of points (1D), sides (2D), faces (3D) delimiting the cell
+  !> - 1D = 2 points {rpxmin^D,rpmax^D}=1,2
+  !> - 2D = 4 sides {rpxmin^D,rpmax^D}=1,2,3,4
+  !> - 3D = 6 faces {rpxmin^D,rpmax^D}=1,2,3,4,5,6
+
+  !> index of the distances dx^D between successive points (1D), sides (2D), faces (3D)
+  !> of a single cell in the current grid block with the same level, along the ^D-axis
   integer, parameter :: rpdx^D_=2*^ND+^D
 
   !> Corner coordinates
-  double precision, allocatable :: rnode(:,:)
+
+  !> rnode(1:rnodehi,ndim) : coordinates of points (1D), sides (2D), faces (3D) delimiting the cells
+  !> of the current node
+  double precision, allocatable :: rnode(:,:) 
   double precision, allocatable :: rnode_sub(:,:)
 
   double precision, allocatable :: dx(:,:)

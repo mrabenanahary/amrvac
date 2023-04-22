@@ -59,6 +59,10 @@ contains
       phi_ = 3
       coordinate=cylindrical
     case ("polar","polar_2D","polar_3D")
+    ! See get_surface_area: polar and cylindrical have same (x,y,z) axis
+    ! and same unit vectors (e_rho,e_z,e_phi), the difference is that
+    ! 2D polar focus simulation on circular sections of the cylinder frame whereas 
+    ! 2D cylindrical focus on axisymetric plans cutting the axis of the cylinder frame
       ndir = ndim
       r_   = 1
       phi_ = 2
@@ -77,12 +81,16 @@ contains
       phi_ = 2
       z_   = 3
       coordinate=cylindrical
+    !> Spherical: theta_ = 2 in [0,pi] implicitly
+    !> check get_surface_area to see it
     case ("spherical","spherical_2D","spherical_3D")
       ndir = ndim
       r_   = 1
       if(ndir==3) phi_ = 3
       z_   = -1
       coordinate=spherical
+    !> Spherical: theta_ = 2 in [0,pi] implicitly
+    !> check get_surface_area to see it 
     case ("spherical_2.5D")
       if (ndim /= 2) &
            call mpistop("Geometry spherical_2.5D requires ndim == 2")
@@ -303,6 +311,12 @@ contains
 
       s%surface(ixG^S,1)=dabs(x(ixG^S,1)){^DE&*dx^DE(ixG^S) }
       {^NOONED
+      !> polar =>(z_,phi_)=(3,2)
+      !> => surface_perp_to_z = r*dr*dphi
+      !> => surface_perp_to_phi = dr(*dz in 3D)         
+      !> cylindrical =>(z_,phi_)=(2,3)
+      !> => surface_perp_to_z = r*dr(*dphi in 3D)
+      !> => surface_perp_to_phi = dr*dz      
       if (z_==2) s%surface(ixG^S,2)=x(ixG^S,1)*drs(ixG^S){^IFTHREED*dx3(ixG^S)}
       if (phi_==2) s%surface(ixG^S,2)=drs(ixG^S){^IFTHREED*dx3(ixG^S)}}
       {^IFTHREED
