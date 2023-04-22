@@ -57,7 +57,7 @@ contains
 
   subroutine usr_write_setting(usr_config_var)
    implicit none
-   type(usr_params), intent(in) :: usr_config_var
+   type(usr_params), intent(inout) :: usr_config_var
    integer,parameter   :: unit_config = 12
    character(len=std_len)   :: filename_config
    !-------------------------------------
@@ -90,6 +90,16 @@ contains
       call write_var_integer(unit_config,number_of_subregions,&
             'number of sub-regions number_of_subregions ')
    end select
+
+   !< FOR TESTS ONLY to split parameters module with procedures module
+   call usr_config_var%set_default_proc('set_value') !< check whether type s object-bound procedure isn t associated
+                                                     !< in which case the corresponding parameter is set to a default value
+   call write_var_string(unit_config,usr_config_var%is_it_null,&
+         'is_it_null ')
+   call change_procedure(usr_config_var) !< change the bound procedure from procedures module
+   call usr_config_var%set_value() !< use type new object-bound procedure from procedures module
+   call write_var_string(unit_config,usr_config_var%is_it_null,&
+         'is_it_null ')
 
    
    write(unit_config,*)''

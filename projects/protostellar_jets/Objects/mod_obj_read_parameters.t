@@ -5,9 +5,23 @@ module mod_obj_read_parameters
 
   implicit none
 
+
+
 contains
 
-  
+  subroutine new_procedure(self)
+    implicit none
+    class(usr_params) :: self
+    !----------------------------------
+    self%is_it_null = 'no'
+  end subroutine new_procedure
+
+  subroutine change_procedure(usr_config_var)
+   implicit none
+   type(usr_params), intent(inout) :: usr_config_var
+   !-----------------------------------------------------
+   usr_config_var%set_value => new_procedure
+  end subroutine change_procedure
 
 end module mod_obj_read_parameters
 
