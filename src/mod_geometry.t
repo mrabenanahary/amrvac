@@ -268,6 +268,10 @@ contains
          s%surfaceC(ixGmin1:ixGmax1,ixGmin2:ixGmax2,1,3)
       }
 
+
+      !> In 3D, we show that 2*sin(theta)*sin(dtheta/2)
+      !> = -cos(theta+dtheta/2)-(-cos(theta-dtheta/2))
+      !> = int(sin(theta)dtheta,theta+dtheta/2,theta-dtheta/2)
       s%surface(ixG^S,1)=x(ixG^S,1)**2 {^NOONED &
            *two*dsin(x(ixG^S,2))*dsin(half*dx2(ixG^S))}{^IFTHREED*dx3(ixG^S)}
       {^NOONED

@@ -70,7 +70,8 @@ vpath %.t $(SRC_DIR)
 .PRECIOUS: mod_usr.f $(OBJ_DIR)/mod_obj_global_parameters.f \
 	$(OBJ_DIR)/mod_obj_types.f \
 	$(OBJ_DIR)/mod_obj_read_parameters.f \
-	$(OBJ_DIR)/mod_obj_input_output.f
+	$(OBJ_DIR)/mod_obj_geometry.f \
+	$(OBJ_DIR)/mod_obj_input_output.f 
 
 # Intermediate files are removed
 .INTERMEDIATE: amrvac.o mod_usr.o mod_usr.mod
@@ -102,7 +103,8 @@ allclean: clean
 amrvac: mod_usr.o amrvac.o $(OBJ_DIR)/mod_obj_global_parameters.o \
 	$(OBJ_DIR)/mod_obj_types.o \
 	$(OBJ_DIR)/mod_obj_read_parameters.o \
-	$(OBJ_DIR)/mod_obj_input_output.o
+	$(OBJ_DIR)/mod_obj_geometry.o \
+	$(OBJ_DIR)/mod_obj_input_output.o 
 
 
 amrvac.o mod_usr.o: $(LIB_AMRVAC)
@@ -117,13 +119,22 @@ mod_obj_read_parameters.o : $(LIB_AMRVAC) \
 	$(OBJ_DIR)/mod_obj_global_parameters.o \
 	$(OBJ_DIR)/mod_obj_types.o
 
+mod_obj_geometry.o : $(LIB_AMRVAC) \
+	$(OBJ_DIR)/mod_obj_global_parameters.o \
+	$(OBJ_DIR)/mod_obj_types.o \
+	$(OBJ_DIR)/mod_obj_read_parameters.o	
+
 mod_obj_input_output.o : $(LIB_AMRVAC) \
 	$(OBJ_DIR)/mod_obj_global_parameters.o \
 	$(OBJ_DIR)/mod_obj_types.o \
-	$(OBJ_DIR)/mod_obj_read_parameters.o
+	$(OBJ_DIR)/mod_obj_read_parameters.o \
+	$(OBJ_DIR)/mod_obj_geometry.o 
+
+	
 
 mod_usr.o: mod_usr.f amrvac.h \
 	$(OBJ_DIR)/mod_obj_global_parameters.o \
 	$(OBJ_DIR)/mod_obj_types.o \
 	$(OBJ_DIR)/mod_obj_read_parameters.o \
+	$(OBJ_DIR)/mod_obj_geometry.o \
 	$(OBJ_DIR)/mod_obj_input_output.o
