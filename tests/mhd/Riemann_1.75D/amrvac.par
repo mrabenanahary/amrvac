@@ -2,6 +2,7 @@
         base_filename='R_1d'
         autoconvert=.true.
         saveprim=.true.
+        nwauxio=3
  /
 
  &savelist

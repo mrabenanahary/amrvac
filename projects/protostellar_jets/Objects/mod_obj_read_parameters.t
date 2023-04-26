@@ -2,7 +2,8 @@ module mod_obj_read_parameters
   use mod_global_parameters
   use mod_obj_global_parameters
   use mod_obj_types  
-
+  use mod_obj_error_handling
+  
   implicit none
 
 

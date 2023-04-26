@@ -5,6 +5,10 @@ module mod_obj_global_parameters
  
   implicit none
 
+   !> The double precision 64 bits kind-parameter
+   integer, parameter :: dp = kind(0.0d0)
+
+
    !> User-defined parameters
 
    !> Domain s parcelling method name. Possible choices are :
@@ -19,6 +23,9 @@ module mod_obj_global_parameters
    character(len=std_len), dimension(avail_prcl_mthd_nb), parameter :: &
                                                       parcel_method_list &
                                                       = ['fixed_numbers']
+
+   !> Unit of length (25/04/2023: =1.0 for instance!)
+   real(dp), parameter :: usr_unit_length = 1.0_dp
  
 contains
 

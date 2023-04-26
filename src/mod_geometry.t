@@ -4,11 +4,13 @@ module mod_geometry
   public
 
   integer :: coordinate=-1
+  integer :: precised_coordinate = -1
   integer, parameter :: Cartesian          = 0
   integer, parameter :: Cartesian_stretched= 1
   integer, parameter :: cylindrical        = 2
   integer, parameter :: spherical          = 3
   integer, parameter :: Cartesian_expansion= 4
+  integer, parameter ::polar               = 5
 
   integer :: type_curl=0
   integer, parameter :: central=1
@@ -29,21 +31,26 @@ contains
     case ("Cartesian","Cartesian_1D","Cartesian_2D","Cartesian_3D")
       ndir = ndim
       coordinate=Cartesian
+      precised_coordinate=Cartesian
     case ("Cartesian_1D_expansion")
       if (ndim /= 1) call mpistop("Geometry Cartesian_1D_expansion but ndim /= 1")
       ndir = ndim
       coordinate=Cartesian_expansion
+      precised_coordinate=Cartesian_expansion
     case ("Cartesian_1.5D")
       if (ndim /= 1) call mpistop("Geometry Cartesian_1.5D but ndim /= 1")
       coordinate=Cartesian
+      precised_coordinate=Cartesian
       ndir = 2
     case ("Cartesian_1.75D")
       if (ndim /= 1) call mpistop("Geometry Cartesian_1.75D but ndim /= 1")
       coordinate=Cartesian
+      precised_coordinate=Cartesian
       ndir = 3
     case ("Cartesian_2.5D")
       if (ndim /= 2) call mpistop("Geometry Cartesian_2.5D but ndim /= 2")
       coordinate=Cartesian
+      precised_coordinate=Cartesian
       ndir = 3
     case ("cylindrical","cylindrical_2D","cylindrical_3D")
       ndir = ndim
@@ -51,6 +58,7 @@ contains
       z_   = 2
       if(ndir==3) phi_ = 3
       coordinate=cylindrical
+      precised_coordinate=cylindrical
     case ("cylindrical_2.5D")
       if (ndim /= 2) call mpistop("Geometry cylindrical_2.5D but ndim /= 2")
       ndir = 3
@@ -58,6 +66,7 @@ contains
       z_   = 2
       phi_ = 3
       coordinate=cylindrical
+      precised_coordinate=cylindrical
     case ("polar","polar_2D","polar_3D")
     ! See get_surface_area: polar and cylindrical have same (x,y,z) axis
     ! and same unit vectors (e_rho,e_z,e_phi), the difference is that
@@ -68,12 +77,14 @@ contains
       phi_ = 2
       if(ndir==3) z_ = 3
       coordinate=cylindrical
+      precised_coordinate=polar
     case ("polar_1.5D")
        if (ndim /= 1) call mpistop("Geometry polar_1.5D but ndim /= 1")
        ndir = 2
        r_   = 1
        phi_ = 2
        coordinate=cylindrical
+       precised_coordinate=polar
     case ("polar_2.5D")
       if (ndim /= 2) call mpistop("Geometry polar_2.5D but ndim /= 2")
       ndir = 3
@@ -81,6 +92,7 @@ contains
       phi_ = 2
       z_   = 3
       coordinate=cylindrical
+      precised_coordinate=polar
     !> Spherical: theta_ = 2 in [0,pi] implicitly
     !> check get_surface_area to see it
     case ("spherical","spherical_2D","spherical_3D")
@@ -89,6 +101,7 @@ contains
       if(ndir==3) phi_ = 3
       z_   = -1
       coordinate=spherical
+      precised_coordinate=spherical
     !> Spherical: theta_ = 2 in [0,pi] implicitly
     !> check get_surface_area to see it 
     case ("spherical_2.5D")
@@ -99,6 +112,7 @@ contains
       phi_ = 3
       z_   = -1
       coordinate=spherical
+      precised_coordinate=spherical
     case default
       call mpistop("Unknown geometry specified")
     end select

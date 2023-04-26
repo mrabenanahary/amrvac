@@ -3,7 +3,7 @@
 	base_filename='bw_2d'
         autoconvert=.true.
         saveprim=.true.
-        nwauxio=1
+        nwauxio=3
 	convert_type='vtuBCCmpi'
  /
 

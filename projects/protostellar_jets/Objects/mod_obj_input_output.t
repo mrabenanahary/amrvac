@@ -2,6 +2,7 @@ module mod_obj_input_output
   use mod_global_parameters
   use mod_obj_global_parameters
   use mod_obj_types  
+  use mod_obj_error_handling
   use mod_obj_read_parameters
   use mod_obj_geometry
 

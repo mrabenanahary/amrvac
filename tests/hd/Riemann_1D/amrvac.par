@@ -5,6 +5,7 @@
         saveprim=.true.
         autoconvert=.true.
 	convert_type='vtuBCCmpi'
+       nwauxio=3
 /
 
  &savelist
@@ -26,8 +27,8 @@
  /
 
  &boundlist
-        typeboundary_min1 = 3*'cont'
-        typeboundary_max1 = 3*'cont'
+        typeboundary_min1 = 4*'cont'
+        typeboundary_max1 = 4*'cont'        
  /
 
  &meshlist

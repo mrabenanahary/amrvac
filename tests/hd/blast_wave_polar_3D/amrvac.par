@@ -3,7 +3,7 @@
 	base_filename='bw_3d'
         autoconvert=.true.
         saveprim=.true.
-        nwauxio=1
+        nwauxio=3
 	convert_type='vtuBCCmpi'
  /
 
@@ -44,7 +44,7 @@
         block_nx3=16
         domain_nx1=32
         domain_nx2=32
-        domain_nx3=16
+        domain_nx3=32
         xprobmin1=0.d0
         xprobmax1=2.d0
         xprobmin2=0.d0

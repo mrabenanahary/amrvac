@@ -69,6 +69,7 @@ vpath %.t $(SRC_DIR)
 # Keep mod_usr.f for inspection
 .PRECIOUS: mod_usr.f $(OBJ_DIR)/mod_obj_global_parameters.f \
 	$(OBJ_DIR)/mod_obj_types.f \
+	$(OBJ_DIR)/mod_obj_error_handling.f \
 	$(OBJ_DIR)/mod_obj_read_parameters.f \
 	$(OBJ_DIR)/mod_obj_geometry.f \
 	$(OBJ_DIR)/mod_obj_input_output.f 
@@ -102,6 +103,7 @@ allclean: clean
 # Dependencies
 amrvac: mod_usr.o amrvac.o $(OBJ_DIR)/mod_obj_global_parameters.o \
 	$(OBJ_DIR)/mod_obj_types.o \
+	$(OBJ_DIR)/mod_obj_error_handling.o \
 	$(OBJ_DIR)/mod_obj_read_parameters.o \
 	$(OBJ_DIR)/mod_obj_geometry.o \
 	$(OBJ_DIR)/mod_obj_input_output.o 
@@ -115,26 +117,32 @@ mod_obj_global_parameters.o : $(LIB_AMRVAC)
 mod_obj_types.o : $(LIB_AMRVAC) \
 	$(OBJ_DIR)/mod_obj_global_parameters.o
 
+mod_obj_error_handling.o :	$(LIB_AMRVAC) \
+	$(OBJ_DIR)/mod_obj_global_parameters.o \
+	$(OBJ_DIR)/mod_obj_types.o \
+
 mod_obj_read_parameters.o : $(LIB_AMRVAC) \
 	$(OBJ_DIR)/mod_obj_global_parameters.o \
-	$(OBJ_DIR)/mod_obj_types.o
+	$(OBJ_DIR)/mod_obj_types.o \
+	$(OBJ_DIR)/mod_obj_error_handling.o
 
 mod_obj_geometry.o : $(LIB_AMRVAC) \
 	$(OBJ_DIR)/mod_obj_global_parameters.o \
 	$(OBJ_DIR)/mod_obj_types.o \
+	$(OBJ_DIR)/mod_obj_error_handling.o \
 	$(OBJ_DIR)/mod_obj_read_parameters.o	
 
 mod_obj_input_output.o : $(LIB_AMRVAC) \
 	$(OBJ_DIR)/mod_obj_global_parameters.o \
 	$(OBJ_DIR)/mod_obj_types.o \
+	$(OBJ_DIR)/mod_obj_error_handling.o \
 	$(OBJ_DIR)/mod_obj_read_parameters.o \
 	$(OBJ_DIR)/mod_obj_geometry.o 
-
-	
 
 mod_usr.o: mod_usr.f amrvac.h \
 	$(OBJ_DIR)/mod_obj_global_parameters.o \
 	$(OBJ_DIR)/mod_obj_types.o \
+	$(OBJ_DIR)/mod_obj_error_handling.o \
 	$(OBJ_DIR)/mod_obj_read_parameters.o \
 	$(OBJ_DIR)/mod_obj_geometry.o \
 	$(OBJ_DIR)/mod_obj_input_output.o
